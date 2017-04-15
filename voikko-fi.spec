@@ -5,19 +5,19 @@
 
 Summary:	Description of Finnish morphology written in Malaga
 Summary(pl.UTF-8):	Opis morfologii języka fińskiego napisany w języku Malaga
-Name:		suomi-malaga
-Version:	1.19
+Name:		voikko-fi
+Version:	2.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/voikko/corevoikko/releases
-Source0:	https://github.com/voikko/corevoikko/archive/rel-suomimalaga-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	51f799e600d7c66623d71f7fc44be31d
+Source0:	https://github.com/voikko/corevoikko/archive/rel-voikko-fi-%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	d92d85476f5e841e46a179408e6ab450
 URL:		http://voikko.puimula.org/
 %{?with_vfst:BuildRequires:	foma}
 BuildRequires:	libstdc++-devel
 BuildRequires:	malaga >= 7.8
-BuildRequires:	python >= 2
+BuildRequires:	python3 >= 1:3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,7 +26,7 @@ Description of Finnish morphology written in Malaga.
 %description -l pl.UTF-8
 Opis morfologii języka fińskiego napisany w języku Malaga.
 
-%package -n voikko-fi-malaga
+%package malaga
 Summary:	Finish dictionary for voikko spellchecker/hyphenator
 Summary(pl.UTF-8):	Słownik fiński dla narzędzia sprawdzania pisowni/przenoszenia wyrazów voikko
 Group:		Applications/Text
@@ -34,44 +34,44 @@ Requires:	libvoikko >= 2.2
 Provides:	voikko-fi = %{version}
 Obsoletes:	voikko-fi < %{version}
 
-%description -n voikko-fi-malaga
+%description malaga
 Finish dictionary for voikko spellchecker/hyphenator.
 
-%description -n voikko-fi-malaga -l pl.UTF-8
+%description malaga -l pl.UTF-8
 Słownik fiński dla narzędzia sprawdzania pisowni/przenoszenia wyrazów
 voikko.
 
-%package -n voikko-fi-vfst
+%package vfst
 Summary:	Finish dictionary for voikko spellchecker/hyphenator
 Summary(pl.UTF-8):	Słownik fiński dla narzędzia sprawdzania pisowni/przenoszenia wyrazów voikko
 Group:		Applications/Text
-Requires:	libvoikko >= 3.8
+Requires:	libvoikko >= 4.0
 Provides:	voikko-fi = %{version}
 Obsoletes:	voikko-fi < %{version}
 
-%description -n voikko-fi-vfst
+%description vfst
 Finish dictionary for voikko spellchecker/hyphenator.
 
-%description -n voikko-fi-vfst -l pl.UTF-8
+%description vfst -l pl.UTF-8
 Słownik fiński dla narzędzia sprawdzania pisowni/przenoszenia wyrazów
 voikko.
 
 #package -n sukija-fi
 
 %prep
-%setup -q -n corevoikko-rel-suomimalaga-%{version}
+%setup -q -n corevoikko-rel-voikko-fi-%{version}
 
 %build
-%{__make} -C suomimalaga all %{?with_vfst:vvfst}
+%{__make} -C voikko-fi all %{?with_vfst:vvfst}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C suomimalaga voikko-install \
+%{__make} -C voikko-fi voikko-install \
 	DESTDIR=$RPM_BUILD_ROOT%{_libdir}/voikko
 
 %if %{with vfst}
-%{__make} -C suomimalaga vvfst-install \
+%{__make} -C voikko-fi vvfst-install \
 	DESTDIR=$RPM_BUILD_ROOT%{_datadir}/voikko
 %endif
 
@@ -80,8 +80,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n voikko-fi-malaga
 %defattr(644,root,root,755)
-%doc suomimalaga/{CONTRIBUTORS,ChangeLog,README}
-%lang(fi) %doc suomimalaga/README.fi
+%doc voikko-fi/{CONTRIBUTORS,ChangeLog,README}
+%lang(fi) %doc voikko-fi/README.fi
 %{_libdir}/voikko/2/mor-standard/voikko-fi_FI.pro
 %{_libdir}/voikko/2/mor-standard/voikko-fi_FI.lex_*
 %{_libdir}/voikko/2/mor-standard/voikko-fi_FI.mor_*
@@ -89,8 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n voikko-fi-vfst
 %defattr(644,root,root,755)
-%doc suomimalaga/{CONTRIBUTORS,ChangeLog,README}
-%lang(fi) %doc suomimalaga/README.fi
+%doc voikko-fi/{CONTRIBUTORS,ChangeLog,README}
+%lang(fi) %doc voikko-fi/README.fi
 %{_datadir}/voikko/5/mor-standard/autocorr.vfst
 %{_datadir}/voikko/5/mor-standard/index.txt
 %{_datadir}/voikko/5/mor-standard/mor.vfst
