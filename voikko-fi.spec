@@ -12,6 +12,7 @@ Source0:	https://github.com/voikko/corevoikko/archive/rel-voikko-fi-%{version}/%
 URL:		https://voikko.puimula.org/
 BuildRequires:	foma
 BuildRequires:	libstdc++-devel
+BuildRequires:	libvoikko
 BuildRequires:	python3 >= 1:3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
