@@ -2,17 +2,17 @@
 Summary:	Description of Finnish morphology written in Malaga
 Summary(pl.UTF-8):	Opis morfologii języka fińskiego napisany w języku Malaga
 Name:		voikko-fi
-Version:	2.3
+Version:	2.5
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/voikko/corevoikko/releases
 Source0:	https://github.com/voikko/corevoikko/archive/rel-voikko-fi-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	446ff56fb26feafdcfa97694a211d930
+# Source0-md5:	4c2438356592b653f82e149582351a8d
 URL:		https://voikko.puimula.org/
 BuildRequires:	foma
 BuildRequires:	libstdc++-devel
-BuildRequires:	libvoikko
+BuildRequires:	libvoikko >= 4.0
 BuildRequires:	python3 >= 1:3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
